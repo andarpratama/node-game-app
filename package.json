@@ -1,0 +1,31 @@
+{
+  "name": "node-gampe-app",
+  "version": "1.0.0",
+  "description": "project from bootcamp at salt academy",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andarpratama/node-game-app.git"
+  },
+  "keywords": [
+    "game-app"
+  ],
+  "author": "Andar Pratama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andarpratama/node-game-app/issues"
+  },
+  "homepage": "https://github.com/andarpratama/node-game-app#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
