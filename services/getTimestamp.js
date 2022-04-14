@@ -22,7 +22,7 @@ const getTime = (loc) => {
 
 const getTimeStamp = () => {
   let time = getTime("Asia/Jakarta");
-  let result = `[${time.year}-${time.month}-${time.day} ${time.hour}:${time.minute}:${time.second}]`;
+  let result = `${time.year}-${time.month}-${time.day} ${time.hour}:${time.minute}:${time.second}`;
   return result;
 };
 
