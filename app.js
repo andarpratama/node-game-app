@@ -1,15 +1,17 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3000
+const routes = require("./routes")
+const bodyParser = require('body-parser');
 require('dotenv').config()
 
-app.get('/', (req, res) => res.json({
-    msg: 'Welcome to the game..',
-    title: 'Node Game App',
-    author: 'Andar Pratama',
-    repo: 'https://github.com/andarpratama/node-game-app'
-}))
+app.use(express.urlencoded({extended: true}))
+app.use(bodyParser.json());
 
+// => Run Routes
+app.use(routes);
+
+// => Run App 
 app.listen(port, () => {
 	console.log(`Server running on port http://localhost:${port}`)
 })
