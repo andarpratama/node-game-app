@@ -5,8 +5,12 @@ const bodyParser = require('body-parser');
 const connectDB = require('./configs/mongoDB')
 const logging = require('./services/logging')
 require('dotenv').config()
+const generateResource = require('./services/generate.resource')
 
+// connections database
 connectDB()
+generateResource()
+
 app.use(express.urlencoded({extended: true}))
 app.use(bodyParser.json());
 
