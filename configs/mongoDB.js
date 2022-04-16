@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const logging = require('../services/logging')
 const connectDB = () => {
-   const pathURL = 'mongodb+srv://andarpratama:0ne41sGvLaRjTrCA@node-game-app.scrnm.mongodb.net/game-api?retryWrites=true&w=majority'
+   // const pathURL = "mongodb+srv://andarpratama:0ne41sGvLaRjTrCA@node-game-app.scrnm.mongodb.net/game-api-test?retryWrites=true&w=majority"
+   const pathURL = process.env.DB_HOST
    const connectOption = { useNewUrlParser: true, useUnifiedTopology: true }
    mongoose.connect(pathURL, connectOption)
 
