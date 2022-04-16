@@ -46,8 +46,18 @@ module.exports = (err, req, res, next) => {
     case "Password Required":
       code = 422;
       message =
-        "Emai Required: Your Password is required to perform this action";
+        "Password Required: Your Password is required to perform this action";
       error = { password: "Password Required" };
+      break;
+
+    case "Login Failed":
+      code = 401;
+      message = "Login failed, email or password is wrong";
+      break;
+    
+      case "Email not Registered":
+      code = 401;
+      message = "Login failed, email is not registered";
       break;
 
     case "Login_required_input":

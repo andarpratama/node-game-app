@@ -5,7 +5,11 @@ class Farm {
    static getAll(req, res) {
       farmModel.find()
          .then((result) => {
-            res.status(201).json({msg: 'Success find all farms', data: result})
+            res.status(201).json({
+               succes: true,
+               message: 'Success find all farms', 
+               data: result
+            })
          })
          .catch((err) => {
             throw ({name: 'Failed_get_all'})
@@ -16,7 +20,7 @@ class Farm {
       const { id } = req.params
       farmModel.findById(id)
          .then((result) => {
-            res.status(201).json({msg: `Success find farm with id : ${id}`, data: result})
+            res.status(201).json({message: `Success find farm with id : ${id}`, data: result})
          })
          .catch((err) => {
             throw ({name: 'Failed_get_detail'})
@@ -27,7 +31,7 @@ class Farm {
       const {name} = req.body
       farmModel.create({name})
          .then((result) => {
-            res.status(201).json({msg: 'Success creating new Farm', data: result})
+            res.status(201).json({message: 'Success creating new Farm', data: result})
          })
          .catch((err) => {
             throw({name: 'Failed_created'})
@@ -39,7 +43,7 @@ class Farm {
       const { name } = req.body
       farmModel.findByIdAndUpdate(id, {name}, {new: true})
          .then((result) => {
-            res.status(201).json({msg: `Success updating farm with id : ${id}`, data: result})
+            res.status(201).json({message: `Success updating farm with id : ${id}`, data: result})
          })
          .catch((err) => {
             throw({name: 'Failed_updated'})
@@ -50,7 +54,7 @@ class Farm {
       const { id } = req.params
       farmModel.findByIdAndDelete(id)
          .then((result) => {
-            res.status(201).json({msg: `Success deleting farm with id : ${id}`})
+            res.status(201).json({message: `Success deleting farm with id : ${id}`})
          })
          .catch((err) => {
             throw({name: 'Failed_deleted'})
@@ -65,7 +69,7 @@ class Farm {
             farmModel.findByIdAndUpdate(foundFarm.id, { $inc: { 'earn': - foundFarm.earn } }, { new: true })
             .then((_) => {})
          } else {
-            res.status(500).json({ msg: 'Gold in farm is empty' })
+            res.status(500).json({ message: 'Gold in farm is empty' })
             res.end()
          }
 
@@ -77,11 +81,11 @@ class Farm {
             if (updatedUser.resource.golds > 1000) {
                userModel.findByIdAndUpdate(req.userID, {'resource.foods': 1000}, {new: true})
             }
-            res.status(200).json({msg: 'Success collect the farm..', incrementFood: `+ ${foundFarm.earn}`, dataGolds: updatedUser.resource.golds, dataFoods: updatedUser.resource.foods})
+            res.status(200).json({message: 'Success collect the farm..', incrementFood: `+ ${foundFarm.earn}`, dataGolds: updatedUser.resource.golds, dataFoods: updatedUser.resource.foods})
          })
-         .catch((err)=> res.status(500).json({msg: 'Failed collect the farm..', data: err}))
+         .catch((err)=> res.status(500).json({message: 'Failed collect the farm..', data: err}))
       })
-      .catch((err)=> res.status(500).json({msg: 'Failed collect the farm..'}))
+      .catch((err)=> res.status(500).json({message: 'Failed collect the farm..'}))
       
   }
 }
