@@ -6,6 +6,11 @@ module.exports = (err, req, res, next) => {
   
     switch (name) {
 
+      case "Data Empty":
+        code = 204;
+        message = "Data is Empty ..";
+        break;
+
       case "Failed_created":
         code = 500;
         message = "Failed create..";

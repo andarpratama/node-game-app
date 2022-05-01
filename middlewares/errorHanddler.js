@@ -54,8 +54,8 @@ module.exports = (err, req, res, next) => {
       code = 401;
       message = "Login failed, email or password is wrong";
       break;
-    
-      case "Email not Registered":
+
+    case "Email not Registered":
       code = 401;
       message = "Login failed, email is not registered";
       break;
@@ -108,6 +108,10 @@ module.exports = (err, req, res, next) => {
     case "Your_soldiers_greater":
       code = 500;
       message = "Your soldiers greater than enemy soldier..";
+      break;
+    case "Data Empty":
+      code = 204;
+      message = "Data is Empty ..";
       break;
 
     default:

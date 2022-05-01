@@ -11,6 +11,7 @@ router.get('/:id', farmController.getOne)
 router.post('/', farmController.createFarm)
 router.put('/:id', farmController.updateFarm)
 router.delete('/:id', farmController.deleteFarm)
+router.delete('/all', farmController.deleteAll)
 router.post('/collect/:id', farmController.collect)
 router.use(errHanddler)
 
