@@ -12,7 +12,7 @@ const connectDB = async () => {
    db.on('error', console.error.bind(console, 'Connection error :'))
    db.once('open', async () => {
       generateResource()
-      // console.log(`[INFO] [DB] Message : Database connected`)
+      console.log(`[INFO] [DB] Message : Database connected`)
    } )
 }
 
