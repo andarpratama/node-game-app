@@ -1,24 +1,7 @@
 const farmModel = require("../models/Farm");
-const { $where } = require("../models/Users");
 const userModel = require("../models/Users");
 
 class Farm {
-  // static getAll(req, res) {
-  //    farmModel.find()
-  //       .then((result) => {
-  // if(!result.data){
-  //    throw { name: "Data Empty" };
-  // }
-  // res.status(201).json({
-  //    succes: true,
-  //    message: 'Success find all farms',
-  //    data: result
-  // })
-  //       })
-  //       .catch((err) => {
-  //          throw ({name: 'Failed_get_all'})
-  //       })
-  // }
 
   static async getAll(req, res, next) {
     try {
@@ -104,13 +87,6 @@ class Farm {
        console.log(error)
       next(error)
     }
-    // farmModel.create({name})
-    //    .then((result) => {
-    //       res.status(201).json({message: 'Success creating new Farm', data: result})
-    //    })
-    //    .catch((err) => {
-    //       throw({name: 'Failed_created'})
-    //    })
   }
 
   static updateFarm(req, res) {
@@ -161,7 +137,10 @@ class Farm {
             )
             .then((_) => {});
         } else {
-          res.status(500).json({ message: "Gold in farm is empty" });
+          res.status(500).json({ 
+            success: false,
+            message: "Gold in farm is empty" }
+            );
           res.end();
         }
         userModel
@@ -181,6 +160,7 @@ class Farm {
             res
               .status(200)
               .json({
+                success: true,
                 message: "Success collect the farm..",
                 incrementFood: `+ ${foundFarm.earn}`,
                 dataGolds: updatedUser.resource.golds,

@@ -50,7 +50,7 @@ class Market {
            const createMarket = await marketModel.create({ name, users: req.userID });
            const payment = await userModel.findByIdAndUpdate(users.id, {$inc: {'resource.golds': -30, 'resource.foods': -10}}, {new: true})
            const pushMarket = await userModel.findByIdAndUpdate(users.id, {$push: {'resource.markets': createMarket.id}}, {new: true})
-           res.status(200).json({
+           res.status(201).json({
                success: true,
                message: 'Success created market..', 
                data: createMarket})
@@ -86,7 +86,9 @@ class Market {
      userModel.findByIdAndUpdate(req.userID, { $pull: { 'resource.markets': req.params.id } }, { new: true }).then()
      marketModel.findByIdAndDelete(id)
       .then((result) => {
-        res.status(201).json({ msg: `Success deleting market with id : ${id}` });
+        res.status(201).json({ 
+          success: true,
+          message: `Success deleting market with id : ${id}` });
       })
       .catch((err) => {
         res.status(500).json({ msg: 'Failed deleting market', data: err });
@@ -101,7 +103,10 @@ class Market {
             marketModel.findByIdAndUpdate(foundMarket.id, { $inc: { 'earn': - foundMarket.earn } }, { new: true })
             .then((_) => {})
          } else {
-            res.status(500).json({ msg: 'Gold in market is empty' })
+            res.status(500).json({ 
+              success: false,
+              message: 'Gold in market is empty' }
+              )
             res.end()
          }
 
@@ -110,9 +115,18 @@ class Market {
             if (updatedUser.resource.golds > 1000) {
                userModel.findByIdAndUpdate(req.userID, {'resource.golds': 1000}, {new: true})
             }
-            res.status(200).json({msg: 'Success collect the market..', incrementGold: `+ ${foundMarket.earn}`, dataGolds: updatedUser.resource.golds, dataFoods: updatedUser.resource.foods})
+            res.status(200).json({
+              success: true,
+              message: 'Success collect the market', 
+              incrementGold: `+ ${foundMarket.earn}`, 
+              dataGolds: updatedUser.resource.golds, 
+              dataFoods: updatedUser.resource.foods
+            })
          })
-         .catch((err)=> res.status(500).json({msg: 'Failed collect the market..', data: err}))
+         .catch((err)=> res.status(500).json({
+           success: false,
+           message: 'Failed collect the market..', 
+           data: err}))
       })
       .catch((err)=> res.status(500).json({msg: 'Failed collect the market..'}))
       
