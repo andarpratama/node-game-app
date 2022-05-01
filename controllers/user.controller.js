@@ -1,11 +1,15 @@
 const userModel = require ("../models/Users")
+const bcrypt = require("bcrypt");
 
 class Users {
 
    static getAll(req, res) {
       userModel.find()
       .then((result) => {
-         res.status(201).json({msg: `Success get all users`, data: result})
+         res.status(201).json({
+            success: true,
+            message: `Success get all users`, 
+            data: result})
       })
       .catch((err) => {
          throw ({name: 'Failed_get_all'})
@@ -17,19 +21,22 @@ class Users {
       const id = req.userID
       userModel.findById(id)
       .then((result) => {
-         res.status(201).json({msg: `Detail resource townhall`, data: result})
+         res.status(201).json({
+            success: true,
+            message: `Detail resource of townhall`, 
+            data: result})
       })
       .catch((err) => {
          throw ({name: 'Failed_get_detail'})
       })
   }
 
-  static update(req, res) {
+  static async update(req, res) {
      const id = req.params.id;
-     const { name, email, password } = req.body;
-     
-     const updateData = { name, email, password };
-     
+     let { name, email, password } = req.body;
+     password = await bcrypt.hash(req.body.password, 8)
+     const updateData = { name, email, password};
+
      for (const item in updateData) {
       //   if (updateData[item] === updateData['password']) {
       //      updateData[item] = bcrypt.hashSync(updateData[item], 8);
@@ -42,7 +49,11 @@ class Users {
 
     userModel.findByIdAndUpdate(id, updateData, { new: true })
       .then((result) => {
-        res.status(200).json({ msg: 'Success update the user', data: result });
+        res.status(201).json({ 
+           success: true,
+           message: 'Success update the user', 
+           data: result 
+         });
       })
       .catch((err) => {
         throw ({name: 'Failed_updated'})
@@ -53,7 +64,8 @@ class Users {
    static delete(req, res) {
       userModel.findByIdAndDelete(req.params.id)
          .then((result) => {
-            res.status(201).json({msg: `Success delete your user`})
+            res.status(201).json({
+               message: `Success delete your user`})
          })
          .catch((err) => {
             throw ({name: 'Failed_deleted'})
