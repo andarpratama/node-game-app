@@ -8,9 +8,9 @@ require('dotenv').config();
 class App {
   static app;
   constructor() {
+    require('dotenv').config();
     this.app = express();
     this.plugin();
-    require('dotenv').config();
   }
 
   plugin() {
