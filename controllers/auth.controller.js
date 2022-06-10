@@ -61,9 +61,13 @@ class Auth {
         throw { name: 'Login Failed' };
       }
 
-      let token = jwt.sign({ id: foundUser.id }, process.env.SECRET_KEY, {
-        expiresIn: '1hr',
-      });
+      let token = jwt.sign(
+        { id: foundUser.id },
+        process.env.SECRET_KEY || 'userKey',
+        {
+          expiresIn: '1hr',
+        }
+      );
 
       res.status(200).json({
         success: true,
