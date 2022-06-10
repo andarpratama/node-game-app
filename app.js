@@ -1,28 +1,16 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const routes = require("./routes");
-const bodyParser = require("body-parser");
-const connectDB = require("./configs/mongoDB");
-require("dotenv").config();
-
-// function App() {
-//     // connections database
-// connectDB()
-// generateResource()
-
-// app.use(express.urlencoded({extended: true}))
-// app.use(bodyParser.json());
-
-//     // => Run Routes
-//     app.use(routes);
-//     app.get('/', (req, res) => res.json({msg: 'Welcome to the game..'}))
-// }
+const routes = require('./routes');
+const bodyParser = require('body-parser');
+const connectDB = require('./configs/mongoDB');
+require('dotenv').config();
 
 class App {
   static app;
   constructor() {
     this.app = express();
     this.plugin();
+    require('dotenv').config();
   }
 
   plugin() {
