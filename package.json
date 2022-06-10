@@ -9,6 +9,7 @@
     "test": "env-cmd -f ./test.env jest --watchAll --runInBand",
     "tes": "env-cmd -f ./test.env jest"
   },
+  "start": "node server.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andarpratama/node-game-app.git"
