@@ -68,7 +68,7 @@ class Farm {
       let food = users.resource.foods;
       // console.log(users)
 
-      if (gold >= 30 && food >= 10) {
+      if (gold >= 10 && food >= 30) {
         const createFarm = await farmModel.create(name);
         const payment = await userModel.findByIdAndUpdate(
           users.id,
@@ -80,13 +80,11 @@ class Farm {
           { $push: { 'resource.farms': createFarm.id } },
           { new: true }
         );
-        res
-          .status(201)
-          .json({
-            success: true,
-            message: 'Success creating new Farm',
-            data: createFarm,
-          });
+        res.status(201).json({
+          success: true,
+          message: 'Success creating new Farm',
+          data: createFarm,
+        });
       } else {
         res.status(500).json({ msg: 'Gold or food is not enough..' });
       }
