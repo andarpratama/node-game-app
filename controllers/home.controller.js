@@ -4,6 +4,7 @@ class Home {
       msg: 'Welcome to the game..',
       title: 'Node Game App',
       author: 'Andar Pratama',
+      detail_author: 'https://node-game-app.herokuapp.com/author',
       version: 2.0,
       repo: 'https://github.com/andarpratama/node-game-app',
     });
