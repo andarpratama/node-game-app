@@ -7,6 +7,7 @@ class Home {
       detail_author: 'https://node-game-app.herokuapp.com/author',
       version: 2.0,
       repo: 'https://github.com/andarpratama/node-game-app',
+      slide: 'https://bit.ly/3s4CRjH',
     });
   }
 
