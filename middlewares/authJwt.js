@@ -23,13 +23,23 @@ class authJwt {
   }
 
   static authorization(req, res, next) {
-    userModel.findById(req.userID).then(result => {
-      if (result.id !== req.userID) {
-        res.status(403).json({ success: false, msg: `Forbidden access` });
-      } else {
-        next();
-      }
-    });
+    if (!req.userID) {
+      return res
+        .status(403)
+        .json({ success: false, msg: `req.userID is not undefined` });
+    }
+    try {
+      userModel.findById(req.userID).then(result => {
+        if (result.id !== req.userID) {
+          res.status(403).json({ success: false, msg: `Forbidden access` });
+        } else {
+          next();
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
   }
 
   static idIsValid(req, res, next) {
